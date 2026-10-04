@@ -48,6 +48,10 @@ _Avoid_: Finish line, level exit, goal
 A traversal move where the player preserves momentum through a portal pair to cross distance or height.
 _Avoid_: Jump boost, launch, momentum trick
 
+**Fling Gap**:
+A visible space that can only be crossed by carrying momentum through a portal pair.
+_Avoid_: Jump gap, pit, launch puzzle
+
 **Reset Volume**:
 An out-of-bounds space that returns the player or a weighted cube to a valid chamber position.
 _Avoid_: Death zone, kill plane, fail area
@@ -59,3 +63,7 @@ _Avoid_: Narration, dialogue, tutorial text
 **Portal Color Indicator**:
 A minimal interface cue showing which portal colors are currently available or placed.
 _Avoid_: HUD objective, status panel, ammo counter
+
+**Chamber Selector**:
+A test-only entry point that opens a specific test chamber without changing the normal chamber sequence.
+_Avoid_: Level select, debug menu, cheat screen
