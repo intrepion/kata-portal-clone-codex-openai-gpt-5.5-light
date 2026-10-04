@@ -27955,6 +27955,14 @@ void main() {
     }
     return snapshot();
   }
+  function completeMovementSmoke() {
+    loadChamber(1);
+    keys.clear();
+    keys.add("KeyW");
+    update(0.25, performance.now() / 1e3);
+    keys.delete("KeyW");
+    return snapshot();
+  }
   function paired(side) {
     return side === "blue" ? "orange" : "blue";
   }
@@ -28025,7 +28033,7 @@ void main() {
   }
   function update(delta, now) {
     const speed = keys.has("ShiftLeft") ? 6.2 : 3.8;
-    const forward = new Vector3(Math.sin(yaw), 0, Math.cos(yaw));
+    const forward = new Vector3(-Math.sin(yaw), 0, -Math.cos(yaw));
     const right = new Vector3(forward.z, 0, -forward.x);
     const input = new Vector3();
     if (keys.has("KeyW")) input.add(forward);
@@ -28087,7 +28095,7 @@ void main() {
     if (!carriedCube) {
       return;
     }
-    const forward = new Vector3(Math.sin(yaw), 0, Math.cos(yaw)).normalize();
+    const forward = new Vector3(-Math.sin(yaw), 0, -Math.cos(yaw)).normalize();
     cube.position.copy(camera.position).addScaledVector(forward, 1.8);
     cube.position.y = 1.15;
     cubeVelocity.copy(velocity);
@@ -28160,6 +28168,7 @@ void main() {
     completeTraversalSmoke,
     completeCubeButtonSmoke,
     completeFlingSmoke,
+    completeMovementSmoke,
     movePlayerTo
   };
   reset();

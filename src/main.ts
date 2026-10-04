@@ -7,6 +7,7 @@ interface TestApi {
   completeTraversalSmoke: () => Promise<GameSnapshot>;
   completeCubeButtonSmoke: () => Promise<GameSnapshot>;
   completeFlingSmoke: () => Promise<GameSnapshot>;
+  completeMovementSmoke: () => GameSnapshot;
   movePlayerTo: (side: PortalSide) => GameSnapshot;
 }
 
@@ -295,6 +296,15 @@ async function completeFlingSmoke(): Promise<GameSnapshot> {
   return snapshot();
 }
 
+function completeMovementSmoke(): GameSnapshot {
+  loadChamber(1);
+  keys.clear();
+  keys.add('KeyW');
+  update(0.25, performance.now() / 1000);
+  keys.delete('KeyW');
+  return snapshot();
+}
+
 function paired(side: PortalSide): PortalSide {
   return side === 'blue' ? 'orange' : 'blue';
 }
@@ -373,7 +383,7 @@ function updatePortalViews(): void {
 
 function update(delta: number, now: number): void {
   const speed = keys.has('ShiftLeft') ? 6.2 : 3.8;
-  const forward = new THREE.Vector3(Math.sin(yaw), 0, Math.cos(yaw));
+  const forward = new THREE.Vector3(-Math.sin(yaw), 0, -Math.cos(yaw));
   const right = new THREE.Vector3(forward.z, 0, -forward.x);
   const input = new THREE.Vector3();
   if (keys.has('KeyW')) input.add(forward);
@@ -441,7 +451,7 @@ function updateCarriedCube(): void {
   if (!carriedCube) {
     return;
   }
-  const forward = new THREE.Vector3(Math.sin(yaw), 0, Math.cos(yaw)).normalize();
+  const forward = new THREE.Vector3(-Math.sin(yaw), 0, -Math.cos(yaw)).normalize();
   cube.position.copy(camera.position).addScaledVector(forward, 1.8);
   cube.position.y = 1.15;
   cubeVelocity.copy(velocity);
@@ -526,6 +536,7 @@ window.portalCloneTest = {
   completeTraversalSmoke,
   completeCubeButtonSmoke,
   completeFlingSmoke,
+  completeMovementSmoke,
   movePlayerTo,
 };
 
