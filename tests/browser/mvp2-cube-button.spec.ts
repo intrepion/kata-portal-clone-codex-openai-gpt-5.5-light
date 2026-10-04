@@ -1,3 +1,4 @@
+import { pathToFileURL } from 'node:url';
 import { expect, test } from '@playwright/test';
 
 test('MVP 2 carries cube through a portal and opens the chamber exit', async ({ page }) => {
@@ -9,7 +10,7 @@ test('MVP 2 carries cube through a portal and opens the chamber exit', async ({ 
   });
   page.on('pageerror', (error) => errors.push(error.message));
 
-  await page.goto('/?testMode=1&chamber=2');
+  await page.goto(`${pathToFileURL(process.cwd())}/index.html?testMode=1&chamber=2`);
   await page.getByRole('button', { name: 'Begin Test Chamber' }).click();
   await page.waitForFunction(() => Boolean(window.portalCloneTest));
 

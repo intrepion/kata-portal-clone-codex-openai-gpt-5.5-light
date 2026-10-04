@@ -9,9 +9,10 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "build": "tsc && vite build",
+    "build:direct": "npm run build && node scripts/build-direct.mjs",
     "test": "vitest run",
     "test:browser": "playwright test",
-    "check": "npm run build && npm run test && npm run test:browser"
+    "check": "npm run build:direct && npm run test && npm run test:browser"
   },
   "repository": {
     "type": "git",
@@ -30,6 +31,7 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.63.0",
+    "@types/node": "^26.6.4",
     "@types/three": "^0.186.0",
     "esbuild": "^0.28.2",
     "playwright": "^1.63.0",

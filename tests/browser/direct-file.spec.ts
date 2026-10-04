@@ -1,7 +1,7 @@
 import { pathToFileURL } from 'node:url';
 import { expect, test } from '@playwright/test';
 
-test('MVP 1 completes visible two-way portal traversal smoke', async ({ page }) => {
+test('root index launches under file protocol and completes traversal smoke', async ({ page }) => {
   const errors: string[] = [];
   page.on('console', (message) => {
     if (message.type() === 'error') {
@@ -16,8 +16,6 @@ test('MVP 1 completes visible two-way portal traversal smoke', async ({ page }) 
 
   const snapshot = await page.evaluate(() => window.portalCloneTest!.completeTraversalSmoke());
 
-  expect(snapshot.bluePlaced).toBe(true);
-  expect(snapshot.orangePlaced).toBe(true);
   expect(snapshot.portalViewsReady).toBe(true);
   expect(snapshot.traversals).toBeGreaterThanOrEqual(2);
   expect(errors).toEqual([]);

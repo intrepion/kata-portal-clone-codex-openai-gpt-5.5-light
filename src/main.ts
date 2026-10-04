@@ -280,8 +280,8 @@ async function completeCubeButtonSmoke(): Promise<GameSnapshot> {
 
 async function completeFlingSmoke(): Promise<GameSnapshot> {
   loadChamber(3);
-  camera.position.copy(portals.blue.position).add(portals.blue.normal.clone().multiplyScalar(0.32));
-  velocity.set(0, 0, -9.5);
+  camera.position.copy(portals.orange.position).add(portals.orange.normal.clone().multiplyScalar(0.32));
+  velocity.set(0, 0, 9.5);
   checkPortalTraversal(performance.now() / 1000);
   for (let step = 0; step < 40; step += 1) {
     camera.position.addScaledVector(velocity, 0.016);
