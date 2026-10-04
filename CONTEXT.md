@@ -24,9 +24,17 @@ _Avoid_: Target wall, portalable wall, placement zone
 The player-held tool that places the two sides of a portal pair.
 _Avoid_: Weapon, launcher, teleport gun
 
+**Portal Gun Capability**:
+The set of portal colors the player can place in the current test chamber.
+_Avoid_: Upgrade, power, ability
+
 **Weighted Cube**:
 A movable puzzle object used to hold buttons or change chamber state.
 _Avoid_: Box, block, crate
+
+**Carried Cube**:
+A weighted cube held in front of the player while it remains part of the chamber physics.
+_Avoid_: Inventory item, grabbed box, held block
 
 **Pressure Button**:
 A floor control that changes chamber state while a player or weighted cube holds it down.
@@ -47,3 +55,7 @@ _Avoid_: Death zone, kill plane, fail area
 **System Message**:
 A short in-world instruction or reaction from the test facility.
 _Avoid_: Narration, dialogue, tutorial text
+
+**Portal Color Indicator**:
+A minimal interface cue showing which portal colors are currently available or placed.
+_Avoid_: HUD objective, status panel, ammo counter
