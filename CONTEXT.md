@@ -8,6 +8,10 @@ This context defines the language for a small first-person spatial puzzle game i
 A self-contained puzzle room that teaches or combines one spatial challenge.
 _Avoid_: Level, stage, map
 
+**Chamber Sequence**:
+A short ordered set of test chambers that teaches traversal, object manipulation, and momentum in separate steps.
+_Avoid_: Campaign, world, episode
+
 **Portal Pair**:
 The linked orange and blue traversal surfaces that connect two places in the same test chamber.
 _Avoid_: Teleporter, gate pair, warp pair
@@ -35,3 +39,11 @@ _Avoid_: Finish line, level exit, goal
 **Fling**:
 A traversal move where the player preserves momentum through a portal pair to cross distance or height.
 _Avoid_: Jump boost, launch, momentum trick
+
+**Reset Volume**:
+An out-of-bounds space that returns the player or a weighted cube to a valid chamber position.
+_Avoid_: Death zone, kill plane, fail area
+
+**System Message**:
+A short in-world instruction or reaction from the test facility.
+_Avoid_: Narration, dialogue, tutorial text
