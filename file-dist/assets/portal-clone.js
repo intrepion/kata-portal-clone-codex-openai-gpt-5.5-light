@@ -27963,6 +27963,14 @@ void main() {
     keys.delete("KeyW");
     return snapshot();
   }
+  function completeStrafeSmoke() {
+    loadChamber(1);
+    keys.clear();
+    keys.add("KeyD");
+    update(0.25, performance.now() / 1e3);
+    keys.delete("KeyD");
+    return snapshot();
+  }
   function paired(side) {
     return side === "blue" ? "orange" : "blue";
   }
@@ -28034,7 +28042,7 @@ void main() {
   function update(delta, now) {
     const speed = keys.has("ShiftLeft") ? 6.2 : 3.8;
     const forward = new Vector3(-Math.sin(yaw), 0, -Math.cos(yaw));
-    const right = new Vector3(forward.z, 0, -forward.x);
+    const right = new Vector3(-forward.z, 0, forward.x);
     const input = new Vector3();
     if (keys.has("KeyW")) input.add(forward);
     if (keys.has("KeyS")) input.sub(forward);
@@ -28169,6 +28177,7 @@ void main() {
     completeCubeButtonSmoke,
     completeFlingSmoke,
     completeMovementSmoke,
+    completeStrafeSmoke,
     movePlayerTo
   };
   reset();

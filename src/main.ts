@@ -8,6 +8,7 @@ interface TestApi {
   completeCubeButtonSmoke: () => Promise<GameSnapshot>;
   completeFlingSmoke: () => Promise<GameSnapshot>;
   completeMovementSmoke: () => GameSnapshot;
+  completeStrafeSmoke: () => GameSnapshot;
   movePlayerTo: (side: PortalSide) => GameSnapshot;
 }
 
@@ -305,6 +306,15 @@ function completeMovementSmoke(): GameSnapshot {
   return snapshot();
 }
 
+function completeStrafeSmoke(): GameSnapshot {
+  loadChamber(1);
+  keys.clear();
+  keys.add('KeyD');
+  update(0.25, performance.now() / 1000);
+  keys.delete('KeyD');
+  return snapshot();
+}
+
 function paired(side: PortalSide): PortalSide {
   return side === 'blue' ? 'orange' : 'blue';
 }
@@ -384,7 +394,7 @@ function updatePortalViews(): void {
 function update(delta: number, now: number): void {
   const speed = keys.has('ShiftLeft') ? 6.2 : 3.8;
   const forward = new THREE.Vector3(-Math.sin(yaw), 0, -Math.cos(yaw));
-  const right = new THREE.Vector3(forward.z, 0, -forward.x);
+  const right = new THREE.Vector3(-forward.z, 0, forward.x);
   const input = new THREE.Vector3();
   if (keys.has('KeyW')) input.add(forward);
   if (keys.has('KeyS')) input.sub(forward);
@@ -537,6 +547,7 @@ window.portalCloneTest = {
   completeCubeButtonSmoke,
   completeFlingSmoke,
   completeMovementSmoke,
+  completeStrafeSmoke,
   movePlayerTo,
 };
 
