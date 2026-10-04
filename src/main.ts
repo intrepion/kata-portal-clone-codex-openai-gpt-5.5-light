@@ -6,6 +6,7 @@ interface TestApi {
   snapshot: () => GameSnapshot;
   completeTraversalSmoke: () => Promise<GameSnapshot>;
   completeCubeButtonSmoke: () => Promise<GameSnapshot>;
+  completeFlingSmoke: () => Promise<GameSnapshot>;
   movePlayerTo: (side: PortalSide) => GameSnapshot;
 }
 
@@ -18,6 +19,7 @@ interface GameSnapshot {
   carriedCube: boolean;
   buttonPressed: boolean;
   exitOpen: boolean;
+  flingComplete: boolean;
   chamberComplete: boolean;
   player: { x: number; y: number; z: number };
   cube: { x: number; y: number; z: number };
@@ -131,6 +133,14 @@ exitDoor.name = 'chamber exit';
 exitDoor.position.set(0, 1.6, -6.83);
 scene.add(exitDoor);
 
+const flingGap = new THREE.Mesh(
+  new THREE.BoxGeometry(4.8, 0.08, 3.4),
+  new THREE.MeshStandardMaterial({ color: 0x10161b, roughness: 0.9 }),
+);
+flingGap.name = 'fling gap';
+flingGap.position.set(0, 0.02, -1.4);
+scene.add(flingGap);
+
 const portalRenderTargets = {
   blue: new THREE.WebGLRenderTarget(512, 512),
   orange: new THREE.WebGLRenderTarget(512, 512),
@@ -175,9 +185,10 @@ let lastCubeTraversalAt = 0;
 let carriedCube = false;
 let exitOpen = false;
 let chamberComplete = false;
+let flingComplete = false;
 const params = new URLSearchParams(window.location.search);
 let chamberIndex = Number(params.get('chamber') ?? '1');
-if (![1, 2].includes(chamberIndex)) {
+if (![1, 2, 3].includes(chamberIndex)) {
   chamberIndex = 1;
 }
 
@@ -219,6 +230,7 @@ function snapshot(): GameSnapshot {
     carriedCube,
     buttonPressed: isButtonPressed(),
     exitOpen,
+    flingComplete,
     chamberComplete,
     player: {
       x: Number(camera.position.x.toFixed(2)),
@@ -263,6 +275,23 @@ async function completeCubeButtonSmoke(): Promise<GameSnapshot> {
   updateButtonAndExit();
   camera.position.set(0, 1.65, -5.2);
   finishIfAtExit();
+  return snapshot();
+}
+
+async function completeFlingSmoke(): Promise<GameSnapshot> {
+  loadChamber(3);
+  camera.position.copy(portals.blue.position).add(portals.blue.normal.clone().multiplyScalar(0.32));
+  velocity.set(0, 0, -9.5);
+  checkPortalTraversal(performance.now() / 1000);
+  for (let step = 0; step < 40; step += 1) {
+    camera.position.addScaledVector(velocity, 0.016);
+    velocity.multiplyScalar(0.992);
+    finishIfFlingCrossed();
+    await new Promise((resolve) => window.setTimeout(resolve, 8));
+    if (flingComplete) {
+      break;
+    }
+  }
   return snapshot();
 }
 
@@ -374,6 +403,7 @@ function update(delta: number, now: number): void {
   checkCubePortalTraversal();
   updateButtonAndExit();
   finishIfAtExit();
+  finishIfFlingCrossed();
   checkPortalTraversal(now);
   applyCameraRotation();
 }
@@ -392,6 +422,18 @@ function updateButtonAndExit(): void {
     message.textContent = pressed
       ? 'Pressure button held. Chamber exit open.'
       : 'Test chamber 02: carry the weighted cube through the portal pair.';
+  }
+}
+
+function finishIfFlingCrossed(): void {
+  if (chamberIndex !== 3) {
+    return;
+  }
+  const speed = new THREE.Vector3(velocity.x, 0, velocity.z).length();
+  if (camera.position.z < -2.8 && speed > 4.2) {
+    flingComplete = true;
+    chamberComplete = true;
+    message.textContent = 'Momentum preserved. Fling gap crossed.';
   }
 }
 
@@ -430,13 +472,17 @@ function reset(): void {
   carriedCube = false;
   exitOpen = false;
   chamberComplete = false;
+  flingComplete = false;
   cube.position.set(chamberIndex === 2 ? -3.5 : 2.5, 0.62, chamberIndex === 2 ? -5.95 : 1.8);
-  message.textContent = chamberIndex === 2
-    ? 'Test chamber 02: carry the weighted cube through the portal pair.'
-    : 'Test chamber 01: connect the room to itself.';
+  message.textContent = chamberIndex === 3
+    ? 'Test chamber 03: preserve momentum through the portal pair.'
+    : chamberIndex === 2
+      ? 'Test chamber 02: carry the weighted cube through the portal pair.'
+      : 'Test chamber 01: connect the room to itself.';
   cube.visible = chamberIndex === 2;
   button.visible = chamberIndex === 2;
   exitDoor.visible = chamberIndex === 2;
+  flingGap.visible = chamberIndex === 3;
   applyCameraRotation();
 }
 
@@ -479,6 +525,7 @@ window.portalCloneTest = {
   snapshot,
   completeTraversalSmoke,
   completeCubeButtonSmoke,
+  completeFlingSmoke,
   movePlayerTo,
 };
 
