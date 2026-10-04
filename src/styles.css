@@ -1,0 +1,120 @@
+:root {
+  color: #172027;
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background: #0f1418;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+#app,
+canvas {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+}
+
+.start-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 4;
+  border: 0;
+  color: #f7fbff;
+  background:
+    linear-gradient(rgba(14, 18, 22, 0.3), rgba(14, 18, 22, 0.8)),
+    radial-gradient(circle at 50% 40%, rgba(60, 183, 255, 0.36), transparent 24%),
+    #111820;
+  font-size: clamp(1.4rem, 4vw, 3.2rem);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.start-overlay.hidden {
+  display: none;
+}
+
+.hud {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+}
+
+.crosshair {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 0 1px rgba(23, 32, 39, 0.55);
+}
+
+.portal-indicators {
+  position: absolute;
+  left: 24px;
+  bottom: 24px;
+  display: flex;
+  gap: 10px;
+}
+
+.indicator {
+  border: 1px solid rgba(255, 255, 255, 0.58);
+  border-radius: 999px;
+  padding: 8px 12px;
+  color: #ffffff;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.42);
+}
+
+.indicator.blue {
+  background: rgba(0, 104, 190, 0.76);
+}
+
+.indicator.orange {
+  background: rgba(219, 110, 0, 0.78);
+}
+
+.reset {
+  pointer-events: auto;
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.36);
+  border-radius: 6px;
+  padding: 9px 12px;
+  color: #f8fbff;
+  background: rgba(18, 25, 31, 0.7);
+  font: inherit;
+  cursor: pointer;
+}
+
+.system-message {
+  position: fixed;
+  top: 18px;
+  left: 50%;
+  z-index: 3;
+  max-width: min(640px, calc(100vw - 32px));
+  padding: 10px 14px;
+  color: #dce9ef;
+  background: rgba(15, 20, 24, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  line-height: 1.35;
+  text-align: center;
+  transform: translateX(-50%);
+}

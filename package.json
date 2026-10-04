@@ -1,0 +1,40 @@
+{
+  "name": "kata-portal-clone-codex-openai-gpt-5.5-light",
+  "version": "1.0.0",
+  "description": "A small first-person Portal-inspired browser puzzle clone.",
+  "type": "module",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc && vite build",
+    "test": "vitest run",
+    "test:browser": "playwright test",
+    "check": "npm run build && npm run test && npm run test:browser"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/intrepion/kata-portal-clone-codex-openai-gpt-5.5-light.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/intrepion/kata-portal-clone-codex-openai-gpt-5.5-light/issues"
+  },
+  "homepage": "https://github.com/intrepion/kata-portal-clone-codex-openai-gpt-5.5-light#readme",
+  "dependencies": {
+    "@dimforge/rapier3d-compat": "^0.21.0",
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@types/three": "^0.186.0",
+    "esbuild": "^0.28.2",
+    "playwright": "^1.63.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.2",
+    "vitest": "^5.0.3"
+  }
+}
