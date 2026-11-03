@@ -1,6 +1,28 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "gameId": "kata-portal-clone-codex-openai-gpt-5.5-light",
   "playUrl": "https://intrepion.github.io/kata-portal-clone-codex-openai-gpt-5.5-light/",
-  "screenshots": []
+  "screenshots": [
+    {
+      "path": "arcade/screenshots/ci-20261103-01.jpg",
+      "sha256": "59ee563ec162ccbe07bfa273db6e57a2012d9bdbd5ee6829c540691965adbfb4",
+      "alt": "Portal gameplay",
+      "provenance": {
+        "kind": "ci_gameplay_capture",
+        "sourcePath": "arcade/capture-evidence/ci-20261103-01.png",
+        "sourceSha256": "2b7b2f87a9960f5a02f1072143a022de639daa3902190d7f46c93ccc5f802856",
+        "captureCommit": "a4fc370594142800fe498d775e53651d22a60d16",
+        "workflowRunId": "41621652959",
+        "inputHashes": {
+          "app.html": "eb8c9e8b9894d2b85000a51f818a077a57fe3bd8167fc41a3c22db7f53f5320d",
+          "assets/app-B7n9BqrY.css": "9dc767969d55d1273aa1a55b8e075fdbe30285ccf21e41fb2d45615834532eb8",
+          "assets/app-CxIBxZDn.js": "770d7ac5e8a8ab155fba5a6c8a8393538ad92e26b569ac09f0207ec3b146db6b",
+          "index.html": "eb8c9e8b9894d2b85000a51f818a077a57fe3bd8167fc41a3c22db7f53f5320d"
+        },
+        "publishedFilesVerifiedAt": "2026-11-03T10:44:40Z",
+        "captureRecordPath": "arcade/capture-evidence/ci-20261103-record.json",
+        "captureRecordSha256": "9b65ab73615a7a079fdc06690612ee8902b2d6983b7693c482e2d207be38f104"
+      }
+    }
+  ]
 }
