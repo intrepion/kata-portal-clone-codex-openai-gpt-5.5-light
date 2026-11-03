@@ -27,12 +27,12 @@
   "homepage": "https://github.com/intrepion/kata-portal-clone-codex-openai-gpt-5.5-light#readme",
   "dependencies": {
     "@dimforge/rapier3d-compat": "^0.21.0",
-    "three": "^0.186.1"
+    "three": "^0.187.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.63.0",
     "@types/node": "^26.6.4",
-    "@types/three": "^0.186.0",
+    "@types/three": "^0.187.0",
     "esbuild": "^0.28.2",
     "playwright": "^1.63.0",
     "typescript": "^7.0.2",
