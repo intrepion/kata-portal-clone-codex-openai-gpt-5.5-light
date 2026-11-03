@@ -15,7 +15,7 @@ module.exports=async function(page,id){
  else if(key.startsWith('super-mario-64')){await page.keyboard.down('w');await page.waitForTimeout(1000);await page.keyboard.up('w');await page.keyboard.press('Space')}
  else if(key.startsWith('the-sims-4')){await page.getByRole('button',{name:'Mira',exact:true}).first().click().catch(()=>{});await page.waitForTimeout(500)}
  else if(id.startsWith('kata-minecraft-clone')){await page.waitForTimeout(600)}
- else if(id.startsWith('kata-portal-clone')){await page.getByRole('button',{name:'Begin Test Chamber'}).click();await page.locator('canvas').click({position:{x:640,y:400}});await page.mouse.move(1100,400,{steps:10});await page.waitForTimeout(600)}
+ else if(id.startsWith('kata-portal-clone')){await page.getByRole('button',{name:'Begin Test Chamber'}).click();await page.locator('canvas').click({position:{x:10,y:400}});await page.mouse.move(1260,400,{steps:20});await page.waitForTimeout(600)}
  else if(id.startsWith('kata-wordle-clone')){await page.keyboard.type('crane');await page.keyboard.press('Enter');await page.waitForTimeout(500)}
  else throw Error('No capture action for '+id);
 };
