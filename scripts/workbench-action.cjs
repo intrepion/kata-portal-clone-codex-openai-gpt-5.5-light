@@ -15,7 +15,7 @@ module.exports=async function(page,id){
  else if(key.startsWith('super-mario-64')){await page.keyboard.down('w');await page.waitForTimeout(1000);await page.keyboard.up('w');await page.keyboard.press('Space')}
  else if(key.startsWith('the-sims-4')){await page.getByRole('button',{name:'Mira',exact:true}).first().click().catch(()=>{});await page.waitForTimeout(500)}
  else if(id.startsWith('kata-minecraft-clone')){await page.waitForTimeout(600)}
- else if(id.startsWith('kata-portal-clone')){await page.getByRole('button',{name:'Begin Test Chamber'}).click();await page.keyboard.down('s');await page.waitForTimeout(60000);await page.keyboard.up('s');await page.waitForTimeout(500)}
+ else if(id.startsWith('kata-portal-clone')){await page.getByRole('button',{name:'Begin Test Chamber'}).click();await page.keyboard.down('s');await page.waitForFunction(() => window.portalCloneTest.snapshot().player.z < 0, null, {timeout: 180000});await page.keyboard.up('s');await page.waitForTimeout(500)}
  else if(id.startsWith('kata-wordle-clone')){await page.keyboard.type('crane');await page.keyboard.press('Enter');await page.waitForTimeout(500)}
  else throw Error('No capture action for '+id);
 };
