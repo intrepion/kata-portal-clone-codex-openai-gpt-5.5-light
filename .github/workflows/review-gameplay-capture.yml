@@ -29,7 +29,7 @@ jobs:
           server_pid=$!
           trap 'kill "$server_pid"' EXIT
           for i in $(seq 1 40); do curl --fail --silent http://127.0.0.1:4320/ > /dev/null && break; sleep 0.25; done
-          node scripts/capture-arcade.cjs
+          xvfb-run -a node scripts/capture-arcade.cjs
       - uses: actions/upload-artifact@v4
         with:
           name: gameplay-capture
