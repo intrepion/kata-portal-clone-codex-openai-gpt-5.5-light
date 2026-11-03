@@ -21,3 +21,7 @@ MVP 1 proves visible two-way portal traversal with destination-camera portal vie
 MVP 2 proves weighted cube carry, cube portal traversal, pressure button unlock, and chamber exit completion.
 MVP 3 proves velocity-preserving fling traversal across a visible gap.
 MVP 4 proves the root `index.html` launches under `file://` with the same browser completion routes.
+
+## Play online
+
+[Play on GitHub Pages](https://intrepion.github.io/kata-portal-clone-codex-openai-gpt-5.5-light/). Return to the [Kata Arcade](https://intrepion.github.io/).
